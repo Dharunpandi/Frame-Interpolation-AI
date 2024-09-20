@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaflet Map with Video Overlay</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    
+    indiaCoords = [20.5937, 78.9629];
+    var map = L.map('map').setView(indiaCoords, 3);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 10,
+    }).addTo(map);
+
+    var USlatLngBounds = L.latLngBounds([[32, -130], [13, -100]]);
+    var videoUsaUrls = 'https://www.mapbox.com/bites/00188/patricia_nasa.mp4';
+
+    var errorOverlayUrl = 'https://cdn-icons-png.flaticon.com/512/110/110686.png';
+    var prototype_vidlatLngBounds = L.latLngBounds([[50, 20], [-50, 130]]);
+    var prototype_url = 'satImages/proto.mp4';
+
+    var videoOverlay = L.videoOverlay(prototype_url, prototype_vidlatLngBounds, {
+        opacity: 0.8,
+        errorOverlayUrl: errorOverlayUrl,
+        interactive: true,
+        autoplay: true,
+        muted: true,
+        playsInline: true
+    }).addTo(map);
+    map.fitBounds(prototype_vidlatLngBounds);
+
+    // testimgUrl = 'cropped_images/9.jpg';
+    // var testimglatLngBounds = L.latLngBounds([[50, 20], [-50, 130]]);
+
+    // var imageOverlay = L.imageOverlay(testimgUrl, testimglatLngBounds, {
+    //   opacity: 0.8,
+    //   errorOverlayUrl: errorOverlayUrl,
+    //   interactive: true,
+    // }).addTo(map);
+
+  </script>
+</body>
+
+</html>
